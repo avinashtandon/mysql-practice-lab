@@ -29,7 +29,7 @@ left join p1.customers c on t.customer_id = c.customer_id;
 
 -- Find all products purchased by customers with 'Platinum' loyalty status.
 
-  select p.name
+  select distinct p.name
       from transaction_items ti
   left join p1.transactions t on t.trans_id = ti.trans_id
           left join products p on ti.product_id = p.product_id
@@ -38,9 +38,25 @@ left join p1.customers c on t.customer_id = c.customer_id;
 
 -- Date Filtering
 -- Find all transactions that occurred in the first 10 days of June 2024.
+
+    select t.trans_id
+        from transactions t
+    where t.trans_date between '2024-06-01' and '2024-06-10';
+
 -- Calculate the total revenue generated on each day.
+
+
+
 -- Pattern Discovery
 -- Identify the top 3 most sold product categories.
+
+   select
+          sum(ti.quantity) as total_qty,
+          p.category
+       from transaction_items ti
+   left join p1.products p on p.product_id = ti.product_id
+   group by p.category order by total_qty desc limit 3;
+
 
 -- Determine which loyalty status has the highest average spending per customer.
 

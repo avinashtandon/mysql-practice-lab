@@ -16,7 +16,26 @@ group by c.name;
 
 -- Joins Across Multiple Tables
 -- List all transactions along with customer names and product names.
+
+select t.trans_id,
+       c.name,
+       p.name,
+       ti.quantity,
+       ti.price
+    from transactions t
+left join p1.transaction_items ti on t.trans_id = ti.trans_id
+        left join products p on ti.product_id = p.product_id
+left join p1.customers c on t.customer_id = c.customer_id;
+
 -- Find all products purchased by customers with 'Platinum' loyalty status.
+
+  select p.name
+      from transaction_items ti
+  left join p1.transactions t on t.trans_id = ti.trans_id
+          left join products p on ti.product_id = p.product_id
+  left join p1.customers c on t.customer_id = c.customer_id
+  where c.loyalty_status='Platinum';
+
 -- Date Filtering
 -- Find all transactions that occurred in the first 10 days of June 2024.
 -- Calculate the total revenue generated on each day.

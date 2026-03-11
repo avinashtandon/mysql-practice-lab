@@ -164,7 +164,10 @@ employee1
 employee2
 salary
 --
-
+SELECT a.name AS employee1,b.name AS employee2,a.salary
+FROM employees a 
+JOIN employees b on a.salary = b.salary
+WHERE a.id > b.id;
 --
 Question 3
 
@@ -174,9 +177,17 @@ Return:
 
 employee
 manager
-Question 4
 
-Show employees whose salary is greater than their manager's salary.
+--
+SELECT a.name AS employee,b.name AS manager
+FROM employees a 
+JOIN employees b on a.manager_id = b.id
+--
+Question 4
+--
+
+--
+Show employees whose salary is greater than their managers salary
 
 Return:
 
@@ -184,6 +195,15 @@ employee
 manager
 employee_salary
 manager_salary
+--
+SELECT a.name AS employee,
+       b.name AS manager,
+       a.salary AS employee_salary,
+       b.salary AS manager_salary
+FROM employees a 
+JOIN employees b on a.manager_id = b.id
+WHERE a.salary > b.salary;       
+--
 Question 5
 
 Show employees who report to the same manager.
@@ -193,12 +213,168 @@ Return:
 employee1
 employee2
 manager_id
+--
+SELECT a.name AS employee1,
+       b.name AS employee2,
+       a.manager_id
+FROM employees a 
+JOIN employees b ON a.manager_id = b.manager_id
+WHERE a.id > b.id;
+--
 Question 6 (Harder – Interview Level)
 
-Show employees whose salary is the same as their manager's salary.
+| id | name   | manager_id | salary |
+|----|--------|------------|--------|
+| 1  | Rahul  | NULL       | 70000  |
+| 2  | Neha   | 1          | 50000  |
+| 3  | Arjun  | 1          | 50000  |
+| 4  | Priya  | 2          | 60000  |
+| 5  | Aman   | 2          | 50000  |
+| 6  | Kavita | 3          | 60000  |
+
+Show employees whose salary is the same as their managers salary.
 
 Return:
 
 employee
 manager
 salary
+--
+SELECT a.name AS employee,b.name AS manager, a.salary 
+FROM employees a 
+JOIN employees b ON a.manager_id = b.id
+WHERE a.salary = b.salary;
+--
+
+
+---
+
+
+Question 1
+
+Show employees who have the same manager.
+
+Return:
+
+employee1
+employee2
+manager_id
+--
+SELECT a.name AS employee1, b.name AS employee2, a.manager_id
+FROM employees a 
+JOIN employees b ON a.manager_id = b.manager_id;
+
+--
+Question 2
+
+Show employees whose salary is greater than their managers salary.
+
+Return:
+
+employee
+manager
+employee_salary
+manager_salary
+--
+SELECT a.name AS employee,
+       b.name AS manager,
+       a.salary AS employee_salary,
+       b.salary AS manager_salary
+FROM employees a 
+JOIN employees b ON a.id = b.manager_id
+WHERE a.salary > b.salary;
+--
+Question 3
+
+Show employees whose salary is the same as their managers salary.
+
+Return:
+
+employee
+manager
+salary
+--
+SELECT a.name AS employee, b.name AS manager, a.salary 
+FROM employees a 
+JOIN employees b ON a.manager_id = b.id
+WHERE a.salary = b.salary;
+-----------------------------------------------
+
+Question 1
+
+Show employees whose manager earns more than them.
+
+Return:
+
+employee
+manager
+employee_salary
+manager_salary
+--
+SELECT a.name AS employee,
+       b.name AS manager ,
+       a.salary AS employee_salary,
+       b.salary AS manager_salary
+FROM employees a 
+JOIN employees b ON a.manager_id = b.id
+WHERE b.salary > a.salary;       
+--
+Question 2
+
+Show employees who report to the same manager.
+
+Return:
+
+employee1
+employee2
+manager_id
+--
+SELECT a.name AS employee1,
+       b.name AS employee2,
+       a.manager_id
+FROM employees a
+JOIN employees b ON a.manager_id = b.manager_id
+WHERE a.id > b.id;
+--
+One Mental Shortcut
+
+Before writing a self join, ask:
+
+What relationship am I comparing?
+Relationship	Join Condition
+employee → manager	a.manager_id = b.id
+manager → employee	a.id = b.manager_id
+same manager	a.manager_id = b.manager_id
+same salary	a.salary = b.salary
+
+
+--
+
+
+Table A (a)                        Table B (b)
+
+| id | name  | manager_id |        | id | name  | manager_id |
+|----|-------|------------|        |----|-------|------------|
+| 1  | Rahul | NULL       |        | 1  | Rahul | NULL       |
+| 2  | Neha  | 1          |        | 2  | Neha  | 1          |
+| 3  | Arjun | 1          |        | 3  | Arjun | 1          |
+| 4  | Priya | 2          |        | 4  | Priya | 2          |
+--------------------------------------------------------------
+
+Question 1
+
+Show employees whose manager earns more than them.
+
+Return:
+
+employee
+manager
+employee_salary
+--
+SELECT a.name AS employee,
+       b.name AS manager,
+       a.employee_salary
+FROM employees a 
+JOIN employees b ON a.manager_id = b.id
+    
+--

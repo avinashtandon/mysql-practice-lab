@@ -377,4 +377,121 @@ SELECT a.name AS employee,
 FROM employees a 
 JOIN employees b ON a.manager_id = b.id
     
+---------------------------------------------------
+
+Question 1
+
+Show employees who have the same salary as another employee.
+
+Return:
+
+employee1
+employee2
+salary
 --
+SELECT a.name AS employee1,
+       b.name AS employee2,
+       a.salary
+FROM employees a 
+JOIN employees b ON a.salary = b.salary
+WHERE a.id > b.id;
+--
+Question 2
+
+Show employees and their manager names.
+
+Return:
+
+employee
+manager
+--
+SELECT a.name AS employee,
+       b.name AS manager 
+FROM employees a 
+JOIN employees b on a.manager_id = b.id;
+--
+Question 3
+
+Show employees who report to the same manager.
+
+Return:
+
+employee1
+employee2
+manager_id
+--
+SELECT a.name AS employee1,
+       b.name AS employee2,
+       a.manager_id
+FROM employees a 
+JOIN employees b on a.manager_id = b.id;
+--
+
+--
+Question 1
+
+Show employees and their manager names.
+
+Return:
+
+employee
+manager
+--
+SELECT a.name AS employee,
+       b.name AS manager 
+FROM employees a 
+JOIN employees b ON a.manager_id = b.id;
+--
+Question 2
+
+Show employees whose salary is greater than their manager’s salary.
+
+Return:
+
+employee
+manager
+employee_salary
+manager_salary
+--
+SELECT a.name AS employee,
+       b.name AS manager,
+       a.salary AS employee_salary,
+       b.salary AS manager_salary
+FROM employees a 
+JOIN employees b ON a.manager_id = b.id
+WHERE a.salary > b.salary;
+--
+Question 3
+
+Show employees whose salary is the same as another employee.
+
+Return:
+
+employee1
+employee2
+salary
+--
+SELECT a.name AS employee1,
+       b.name AS employee2,
+       a.salary
+FROM employees a 
+JOIN employees b ON a.salary = b.salary
+WHERE a.id > b.id; 
+--
+Question 4
+
+Show employees who report to the same manager.
+
+Return:
+
+employee1
+employee2
+manager_id
+Question 5 (Harder)
+
+Show managers and the employees working under them.
+
+Return:
+
+manager
+employee

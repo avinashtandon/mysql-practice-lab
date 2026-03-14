@@ -10,6 +10,8 @@ A collection of basic-to-intermediate SQL queries for hands-on practice. This re
 - **Pattern Matching**: Using `LIKE` and wildcards (`%`, `_`).
 - **NULL Handling**: Dealing with missing/null data using `IS NULL` and `IS NOT NULL`.
 - **Joins**: Combining data from multiple tables using `INNER JOIN`, `LEFT JOIN`, and `RIGHT JOIN`.
+- **Subqueries**: Using scalar, column, row, and table subqueries including correlated vs uncorrelated subqueries.
+- **Test Practice**: General test scenarios combining topics for real-world practice.
 
 ## Structure
 
@@ -17,3 +19,4 @@ Each file contains SQL practice queries based on sample datasets such as `employ
 
 ---
 _Practice makes perfect!_
+
